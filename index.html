@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1c1a42">
+  <title>PageFuse · Bring PDF notes together</title>
+  <meta name="description" content="Compare annotated copies of the same PDF, resolve conflicts, and keep one reviewable Master with PageFuse.">
+  <link rel="icon" href="assets/app-icon.png">
+  <style>
+    :root{--bg:#171632;--surface:#242347;--text:#f8f7ff;--muted:#c4c1e0;--accent:#8d86ff;--line:rgba(255,255,255,.13);--paper:#f7f6ff}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB",sans-serif;line-height:1.65}
+    a{color:#b6b1ff;text-decoration:none}a:hover{text-decoration:underline}button,a{outline-offset:4px}button:focus-visible,a:focus-visible{outline:3px solid var(--accent)}
+    .container{max-width:1160px;margin:auto;padding:0 24px}.top{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:27px 0;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:12px;color:#fff;font-weight:800;font-size:21px}.brand:hover{text-decoration:none}.brand img{width:42px;height:42px;border-radius:11px}
+    nav{display:flex;align-items:center;gap:22px;flex-wrap:wrap}nav>a{color:var(--muted);font-weight:600}.lang{display:flex;padding:4px;border:1px solid var(--line);border-radius:12px}.lang button{border:0;background:transparent;color:var(--muted);padding:7px 13px;border-radius:9px;cursor:pointer;font:inherit;font-weight:700}.lang button.active{background:var(--accent);color:#161537}
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:54px;padding:75px 0 92px}.eyebrow{letter-spacing:.16em;font-size:13px;font-weight:800;color:#b6b1ff}.hero h1{font-size:clamp(45px,6vw,78px);line-height:1.08;letter-spacing:-.05em;margin:20px 0 24px;max-width:740px}.hero .lead{font-size:19px;color:var(--muted);max-width:680px;margin:0 0 30px}.cta{display:flex;gap:12px;flex-wrap:wrap}.button{display:inline-flex;align-items:center;justify-content:center;border-radius:13px;background:var(--accent);color:#151433;font-weight:800;padding:13px 22px;min-height:48px}.button:hover{text-decoration:none;background:#b0aaff}.button.secondary{background:transparent;color:var(--text);border:1px solid var(--line)}.button.secondary:hover{background:rgba(255,255,255,.08)}.hero-points{display:flex;flex-wrap:wrap;gap:10px;margin-top:27px}.hero-points span{border:1px solid var(--line);padding:5px 11px;border-radius:100px;color:var(--muted);font-size:13px}
+    .hero-visual{position:relative;display:flex;justify-content:center}.glow{position:absolute;inset:10% 0;background:radial-gradient(ellipse,#6861cb88,transparent 65%);filter:blur(26px)}.hero-visual img{position:relative;width:min(100%,360px);height:auto;border-radius:31px;box-shadow:0 28px 80px #0a0928aa}
+    section{padding:72px 0;border-top:1px solid var(--line)}.section-title{font-size:clamp(32px,4vw,48px);line-height:1.18;letter-spacing:-.035em;margin:0 0 15px}.section-lead{color:var(--muted);max-width:760px;margin:0 0 30px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:27px}.card .num{color:#b8b1ff;font-weight:800;letter-spacing:.08em}.card h3{font-size:21px;line-height:1.3;margin:12px 0}.card p{color:var(--muted);margin:0}.step{border-top:3px solid var(--accent)}
+    .gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.gallery figure{margin:0}.gallery img{width:100%;height:auto;border-radius:17px;box-shadow:0 12px 36px #08071e80}.gallery figcaption{color:var(--muted);font-size:14px;margin:10px 2px}.notice{margin-top:26px;padding:22px 26px;background:#302f5b;border-left:4px solid var(--accent);border-radius:0 16px 16px 0;color:#e5e3ff}
+    .info{display:grid;grid-template-columns:1fr 1fr;gap:18px}.info h3{margin-top:0}.info ul{padding-left:21px;color:var(--muted)}.info li+li{margin-top:9px}.info p{color:var(--muted)}footer{border-top:1px solid var(--line);padding:32px 0 45px;color:var(--muted)}footer .container{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:42px}.hero-visual{justify-content:flex-start}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.hero h1{font-size:44px}.grid,.info{grid-template-columns:1fr}.gallery{gap:12px}.top{padding:18px 0}nav{gap:12px}section{padding:52px 0}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+<div class="container">
+  <header class="top">
+    <a class="brand" href="#top"><img src="assets/app-icon.png" alt="PageFuse icon"><span>PageFuse</span></a>
+    <nav aria-label="Main navigation"><a href="#features" data-en="Features" data-zh="功能">Features</a><a href="#how" data-en="How it works" data-zh="使用方法">How it works</a><a href="#support" data-en="Support" data-zh="支持">Support</a><div class="lang" role="group" aria-label="Language"><button type="button" id="en" class="active" aria-pressed="true">English</button><button type="button" id="zh" aria-pressed="false">中文</button></div></nav>
+  </header>
+  <main id="top">
+    <div class="hero"><div>
+      <div class="eyebrow" data-en="PDF ANNOTATION WORKSPACE" data-zh="PDF 批注整理工具">PDF ANNOTATION WORKSPACE</div>
+      <h1 data-en="Every note. One master copy." data-zh="每一处笔记，汇成一份 Master。">Every note. One master copy.</h1>
+      <p class="lead" data-en="Bring highlights, handwritten notes and drawings from separately annotated copies of the same PDF into one document you can review and keep updating." data-zh="把同一份 PDF 的多份副本中的高亮、手写笔记和绘图汇总到一份可审阅、可继续更新的主版本。">Bring highlights, handwritten notes and drawings from separately annotated copies of the same PDF into one document you can review and keep updating.</p>
+      <div class="cta"><a class="button" href="https://apps.apple.com/app/id6816576688" data-en="View on the App Store ↗" data-zh="前往 App Store ↗">View on the App Store ↗</a><a class="button secondary" href="#how" data-en="See how it works" data-zh="了解合并流程">See how it works</a></div>
+      <div class="hero-points"><span data-en="No account" data-zh="无需账号">No account</span><span data-en="Local projects" data-zh="项目本地保存">Local projects</span><span data-en="Review before export" data-zh="导出前逐项审阅">Review before export</span></div>
+    </div><div class="hero-visual"><div class="glow" aria-hidden="true"></div><img src="assets/en-US-1.webp" data-en-src="assets/en-US-1.webp" data-zh-src="assets/zh-Hans-1.webp" data-en-alt="Actual PageFuse project showing an original handwritten PDF" data-zh-alt="PageFuse 真实项目界面，显示原创手写笔记 PDF" alt="Actual PageFuse project showing an original handwritten PDF"></div></div>
+
+    <section id="features"><h2 class="section-title" data-en="Made for annotated copies" data-zh="为多份批注副本而设计">Made for annotated copies</h2><p class="section-lead" data-en="PageFuse solves a focused problem: reconciling changes made to different copies of one PDF." data-zh="PageFuse 专注解决一个问题：整理同一份 PDF 在不同副本上的批注。">PageFuse solves a focused problem: reconciling changes made to different copies of one PDF.</p>
+      <div class="grid">
+        <div class="card"><span class="num">01 / COMPARE</span><h3 data-en="Find what changed" data-zh="找出改动">Find what changed</h3><p data-en="Compare standard PDF notes, highlights and drawings across selected versions; identify new marks and duplicates." data-zh="对比选定版本中的标准 PDF 笔记、高亮和绘图，找出新增内容与重复批注。">Compare standard PDF notes, highlights and drawings across selected versions; identify new marks and duplicates.</p></div>
+        <div class="card"><span class="num">02 / RESOLVE</span><h3 data-en="Choose through conflicts" data-zh="自主处理冲突">Choose through conflicts</h3><p data-en="Inspect overlapping changes by page and keep both annotations, the existing one or the incoming one." data-zh="按页检查重叠的批注，自主选择保留两侧、原有内容或新加入的内容。">Inspect overlapping changes by page and keep both annotations, the existing one or the incoming one.</p></div>
+        <div class="card"><span class="num">03 / MASTER</span><h3 data-en="Build a reviewable Master" data-zh="建立可审阅的 Master">Build a reviewable Master</h3><p data-en="Preview the merged PDF, save the project and export the Master through the system share sheet." data-zh="预览合并后的 PDF，保存项目，并通过系统分享界面导出 Master。">Preview the merged PDF, save the project and export the Master through the system share sheet.</p></div>
+        <div class="card"><span class="num">04 / INK</span><h3 data-en="Preserve supported pen marks" data-zh="保留受支持的笔迹">Preserve supported pen marks</h3><p data-en="Confirm copies share the same source document, then preserve supported embedded pen marks as page content." data-zh="确认副本来自同一原始文档后，可将受支持的嵌入式笔迹保留为页面内容。">Confirm copies share the same source document, then preserve supported embedded pen marks as page content.</p></div>
+        <div class="card"><span class="num">05 / HISTORY</span><h3 data-en="Continue later" data-zh="以后继续整理">Continue later</h3><p data-en="Add more copies to a saved project, inspect source files, resume an unfinished merge or restore an earlier Master." data-zh="向已保存项目继续添加副本，检查来源文件，恢复未完成的合并，或还原更早的 Master。">Add more copies to a saved project, inspect source files, resume an unfinished merge or restore an earlier Master.</p></div>
+        <div class="card"><span class="num">06 / LOCAL</span><h3 data-en="Work on your device" data-zh="在设备上处理">Work on your device</h3><p data-en="Choose PDFs with Apple's Files picker. PageFuse keeps project copies and history in local app storage." data-zh="通过 Apple“文件”选择器选取 PDF。PageFuse 将项目副本和历史保存在 App 本地存储中。">Choose PDFs with Apple's Files picker. PageFuse keeps project copies and history in local app storage.</p></div>
+      </div>
+    </section>
+
+    <section id="how"><h2 class="section-title" data-en="From copies to one Master" data-zh="从多份副本到一份 Master">From copies to one Master</h2><div class="grid">
+      <div class="card step"><span class="num">STEP 01</span><h3 data-en="Select matching PDFs" data-zh="选择同源 PDF">Select matching PDFs</h3><p data-en="Import two or more annotated copies of the same document through Files." data-zh="通过“文件”导入同一文档的两份或更多批注副本。">Import two or more annotated copies of the same document through Files.</p></div>
+      <div class="card step"><span class="num">STEP 02</span><h3 data-en="Review the differences" data-zh="审阅差异">Review the differences</h3><p data-en="Inspect new annotations and conflicts, preview affected pages and make your choices." data-zh="检查新增批注和冲突，预览受影响的页面并作出选择。">Inspect new annotations and conflicts, preview affected pages and make your choices.</p></div>
+      <div class="card step"><span class="num">STEP 03</span><h3 data-en="Save and export" data-zh="保存并导出">Save and export</h3><p data-en="Create the Master, keep its revision history and export when ready." data-zh="生成 Master，保留版本历史，并在需要时导出。">Create the Master, keep its revision history and export when ready.</p></div>
+    </div><div class="notice" data-en="PageFuse reconciles annotated copies of one document. It does not join unrelated PDFs end to end. Flattened pen marks remain page content rather than individually editable annotations." data-zh="PageFuse 用于整理同一文档的批注副本，不会把无关 PDF 首尾拼接。扁平化笔迹将作为页面内容保留，不能作为单独批注继续编辑。">PageFuse reconciles annotated copies of one document. It does not join unrelated PDFs end to end. Flattened pen marks remain page content rather than individually editable annotations.</div></section>
+
+    <section id="screenshots"><h2 class="section-title" data-en="See PageFuse in action" data-zh="看看 PageFuse 的真实界面">See PageFuse in action</h2><p class="section-lead" data-en="These are real app captures using original sound study notes with blue and coral handwriting. Switch languages to see the localized interface." data-zh="以下为真实 App 截图，使用含蓝色与珊瑚色手写笔迹的原创声学笔记。切换语言可查看本地化界面。">These are real app captures using original sound study notes with blue and coral handwriting. Switch languages to see the localized interface.</p><div class="gallery">
+      <figure><img src="assets/en-US-1.webp" data-en-src="assets/en-US-1.webp" data-zh-src="assets/zh-Hans-1.webp" data-en-alt="Saved Master with handwritten sound notes" data-zh-alt="已保存的 Master 与手写声学笔记" alt="Saved Master with handwritten sound notes"><figcaption data-en="A saved Master and its handwritten PDF" data-zh="已保存的 Master 与手写 PDF">A saved Master and its handwritten PDF</figcaption></figure>
+      <figure><img src="assets/en-US-2.webp" data-en-src="assets/en-US-2.webp" data-zh-src="assets/zh-Hans-2.webp" data-en-alt="Resolve overlapping PDF annotations" data-zh-alt="处理重叠的 PDF 批注" alt="Resolve overlapping PDF annotations"><figcaption data-en="Choose how to resolve conflicts" data-zh="选择如何处理冲突">Choose how to resolve conflicts</figcaption></figure>
+      <figure><img src="assets/en-US-3.webp" data-en-src="assets/en-US-3.webp" data-zh-src="assets/zh-Hans-3.webp" data-en-alt="Review annotations before merging" data-zh-alt="合并前审阅批注" alt="Review annotations before merging"><figcaption data-en="Review annotations by page" data-zh="按页审阅批注">Review annotations by page</figcaption></figure>
+      <figure><img src="assets/en-US-4.webp" data-en-src="assets/en-US-4.webp" data-zh-src="assets/zh-Hans-4.webp" data-en-alt="PageFuse saved projects list" data-zh-alt="PageFuse 已保存项目列表" alt="PageFuse saved projects list"><figcaption data-en="Return to saved projects" data-zh="返回已保存的项目">Return to saved projects</figcaption></figure>
+    </div></section>
+
+    <section id="support"><div class="info"><div class="card"><h3 data-en="Privacy" data-zh="隐私">Privacy</h3><p data-en="PageFuse needs no account. The current app does not send PDF contents, project names or analytics to a PageFuse server. Exports and shares go only to destinations you choose." data-zh="PageFuse 无需账号。当前 App 不会将 PDF 内容、项目名称或使用分析发送到 PageFuse 服务器；导出和分享由你选择目标。">PageFuse needs no account. The current app does not send PDF contents, project names or analytics to a PageFuse server. Exports and shares go only to destinations you choose.</p><p><a href="privacy.html" data-en="Read the full privacy policy →" data-zh="查看完整隐私政策 →">Read the full privacy policy →</a></p></div><div class="card"><h3 data-en="Support" data-zh="支持">Support</h3><p data-en="Questions about importing, reviewing or exporting? Email us with your app version, device model and the steps to reproduce the issue. Avoid including sensitive PDFs." data-zh="导入、审阅或导出遇到问题？请通过邮件提供 App 版本、设备型号和复现步骤，并避免附上敏感 PDF。">Questions about importing, reviewing or exporting? Email us with your app version, device model and the steps to reproduce the issue. Avoid including sensitive PDFs.</p><p><a href="mailto:freesysck@outlook.com?subject=PageFuse%20Support">freesysck@outlook.com</a></p></div></div></section>
+  </main>
+</div>
+<footer><div class="container"><span>© 2026 CXY Studio · PageFuse</span><span data-en="Compare → Review → Merge → Keep" data-zh="对比 → 审阅 → 合并 → 保留">Compare → Review → Merge → Keep</span></div></footer>
+<script>
+  const translations = document.querySelectorAll('[data-en]');
+  const pictures = document.querySelectorAll('img[data-en-src]');
+  const descriptions = {
+    en: 'Compare annotated copies of the same PDF, resolve conflicts, and keep one reviewable Master with PageFuse.',
+    zh: '对比同一 PDF 的多份批注副本，处理冲突，并保存一份可持续更新的 Master。'
+  };
+  function setLanguage(language) {
+    const lang = language === 'zh' ? 'zh' : 'en';
+    document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : 'en';
+    translations.forEach(element => { element.textContent = element.dataset[lang]; });
+    pictures.forEach(image => { image.src = image.dataset[`${lang}Src`]; image.alt = image.dataset[`${lang}Alt`]; });
+    document.querySelector('meta[name="description"]').content = descriptions[lang];
+    document.title = lang === 'zh' ? 'PageFuse · 汇总 PDF 批注' : 'PageFuse · Bring PDF notes together';
+    for (const key of ['en','zh']) {
+      const button = document.getElementById(key);
+      button.classList.toggle('active',key===lang);
+      button.setAttribute('aria-pressed',String(key===lang));
+    }
+    try { localStorage.setItem('pagefuse-language',lang); } catch (_) {}
+  }
+  document.getElementById('en').addEventListener('click',()=>setLanguage('en'));
+  document.getElementById('zh').addEventListener('click',()=>setLanguage('zh'));
+  let saved = 'en';
+  try { saved = localStorage.getItem('pagefuse-language') || (navigator.language.toLowerCase().startsWith('zh') ? 'zh' : 'en'); } catch (_) {}
+  setLanguage(saved);
+</script>
+</body>
+</html>
